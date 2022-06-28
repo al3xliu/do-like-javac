@@ -49,7 +49,6 @@ pip2 install lithium-reducer --user
 
 You need to manually install this dependency at the moment.
 
-
 #### Running the tool:
 
 ```bash
@@ -60,6 +59,8 @@ do-like-javac/dljc -t testminimizer \
     --expectReturnCode <0 or 1> \
     -- <your project build cmd>
 ```
+
+__Note__: You may meet the problem `module 'lithium' has no attribute 'TestcaseLine'`, which means there is a interruption by package `lithium`, running `pip uninstall lithium` may solve this problem.
 
 ##### Regex note
 
@@ -78,5 +79,3 @@ project](https://github.com/opprop/DemoProject4TestMinimizer)
 that demos the TestMinimizer. You can clone it and try to run the demo
 script there to have a better sense of what TestMinimizer can do for
 you.
-
-
