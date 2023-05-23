@@ -37,7 +37,11 @@ def run(args, javac_commands, jars):
         if args.lib_dir:
             cp += pp + args.lib_dir + ':'
         java_files = jc['java_files']
-        cmd = checker_command + ["-classpath", cp] + java_files
+        cmd = checker_command + ["-classpath", cp]
+        if '-module-path' in javac_switches:
+            mp = javac_switches['-module-path']
+            cmd += ["--module-path", mp]
+        cmd += java_files
         common.run_cmd(cmd, args, 'check')
 
 ## other_args is other command-line arguments to javac
