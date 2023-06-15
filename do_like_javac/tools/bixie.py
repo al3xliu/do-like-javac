@@ -1,5 +1,7 @@
-import os
 import copy
+import os
+
+from . import common
 
 from . import common
 
