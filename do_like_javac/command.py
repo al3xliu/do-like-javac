@@ -25,14 +25,8 @@ def main():
         sys.exit(1)
 
     javac_commands, jars, stats = result
-<<<<<<< HEAD
-
-    if len(javac_commands) == 0:
-        raise Exception("command.main: no javac commands found by capturer:\n  cmd = {}\n  args = {}".format(cmd, args))
-=======
     if not javac_commands or len(javac_commands) == 0:
         raise ValueError(f"no javac commands found by capturer:\n\tcmd = {cmd}\n\targs = {args}")
->>>>>>> SRI/master
 
     log.info('Results: %s', pprint.pformat(javac_commands))
     output_json(os.path.join(args.output_directory, 'javac.json'), javac_commands)

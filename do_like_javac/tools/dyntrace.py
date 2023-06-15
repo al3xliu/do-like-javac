@@ -1,15 +1,8 @@
 import argparse
 import json
 import os
-<<<<<<< HEAD
-import tempfile
-
-from . import jsoninv
-from . import common
-=======
 
 from . import common, jsoninv
->>>>>>> SRI/master
 
 argparser = argparse.ArgumentParser(add_help=False)
 dyntrace_group = argparser.add_argument_group('dyntrace arguments')
