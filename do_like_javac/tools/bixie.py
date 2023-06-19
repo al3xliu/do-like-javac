@@ -3,8 +3,6 @@ import os
 
 from . import common
 
-from . import common
-
 argparser = None
 
 def run(args, javac_commands, jars):
