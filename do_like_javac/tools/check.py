@@ -76,7 +76,6 @@ def run(args, javac_commands, jars):
             pp = javac_switches['processorpath'] + ':'
         if args.lib_dir:
             cp += pp + args.lib_dir + ':'
-        cp = "/Users/alexliu/projects/linear-checker/build/libs/linear-checker.jar:/Users/alexliu/projects/linear-checker/linear-checker-qual/build/libs/linear-checker-qual.jar:/Users/alexliu/projects/linear-checker/linear-checker-qual-android/build/libs/linear-checker-qual-android.jar:/Users/alexliu/.m2/repository/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar" + cp
         java_files = jc['java_files']
         cmd = checker_command + ["-classpath", cp] + java_files
         common.run_cmd(cmd, args, 'check')
