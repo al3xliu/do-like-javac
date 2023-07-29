@@ -50,6 +50,8 @@ def run(args, javac_commands, jars):
         # if there is already a WPI directory, delete it and start over
         if os.path.isdir(wpiDir):
             shutil.rmtree(wpiDir)
+        else:
+            os.mkdir(wpiDir)
 
         iteration = 0
         diffResult = True
@@ -179,7 +181,6 @@ def run(args, javac_commands, jars):
             pprint.pformat(jc)
 
             cmd = iterationCheckerCmd + ["-classpath", cp] + processorArg + other_args + java_files
-            print("final cmd ===================================: " + cmd);
             stats = common.run_cmd(cmd + ["-Ainfer=ajava", "-Awarns"], args, 'wpi')
 
             # process outputs
