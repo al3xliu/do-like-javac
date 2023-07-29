@@ -141,7 +141,7 @@ def run(args, javac_commands, jars):
                 # can more easily remove key and value for release8, below:
                 if v is not None and v is not True and k.startswith("-add-opens"):
                     other_args.append("-" + k + "=" + v)
-                else: 
+                else:
                     if v is None or v is not False:
                         other_args.append("-" + k)
                     if v is not None and v is not True:
@@ -179,6 +179,7 @@ def run(args, javac_commands, jars):
             pprint.pformat(jc)
 
             cmd = iterationCheckerCmd + ["-classpath", cp] + processorArg + other_args + java_files
+            print("final cmd ===================================: " + cmd);
             stats = common.run_cmd(cmd + ["-Ainfer=ajava", "-Awarns"], args, 'wpi')
 
             # process outputs
