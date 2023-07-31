@@ -77,17 +77,34 @@ def get_tool_command(args, target_classpath, java_files, jaif_file="default.jaif
     if 'CLASSPATH' in os.environ:
         cp += ':' + os.environ['CLASSPATH']
 
-        cmd = CFI_command + ['-classpath', cp,
-                             'checkers.inference.InferenceLauncher',
-                             '--solverArgs', args.solverArgs,
-                             '--cfArgs', args.cfArgs,
-                             '--checker', args.checker,
-                             '--solver', args.solver,
-                             '--mode', args.mode,
-                             '--hacks=true',
-                             '--targetclasspath', target_cp,
-                             '--logLevel=WARNING',
-                             '-afud', args.afuOutputDir]
-        cmd.extend(jc['java_files'])
+        # os env classpath must be added to targetclasspath for running CFI in
+        # typecheck mode
+        target_classpath += ':' + os.environ['CLASSPATH']
+        # TODO: see if this is still needed:
+        # env_classpath must also have a project's dependent jars
+        # os.environ['CLASSPATH'] = target_classpath
 
-        print(f"Running command", " ".join(cmd))
+    CFI_command += [        # '-p', # printCommands before executing
+                            '-classpath', cp,
+                            'checkers.inference.InferenceLauncher']
+
+    if not args.cfArgs == "":
+        CFI_command += [    '--cfArgs', args.cfArgs]
+
+    CFI_command += [        '--checker', args.checker,
+                            '--solver', args.solver,
+                            '--solverArgs', args.solverArgs,
+                            '--mode', args.mode,
+                            '--hacks=true',
+                            '--targetclasspath', target_classpath,
+                            '--logLevel=INFO',
+                            '--jaifFile', jaif_file]
+
+    if args.inPlace:
+        CFI_command += ['--inPlace=true']
+    else:
+        CFI_command += ['-afud', args.afuOutputDir]
+
+    CFI_command.extend(java_files)
+
+    return CFI_command
